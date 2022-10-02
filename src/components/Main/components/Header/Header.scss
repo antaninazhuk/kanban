@@ -1,0 +1,26 @@
+    .header {
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100vw;
+        background-color: var(--light_blue);
+        padding-left: 320px;
+        padding-right: 50px;
+        &__title {
+            padding: 30px 25px;
+            border-bottom: 2px solid var(--gray);
+            font-weight: bold;
+            font-size: 20px;
+            margin: 0;
+        }
+    }
+    
+    .add_task {
+        background-color: var(--accent);
+        border-radius: 30px;
+        padding: 10px 15px;
+        border: none;
+        height: 30%;
+        color: var(--light-text);
+    }
