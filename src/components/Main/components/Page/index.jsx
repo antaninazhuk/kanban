@@ -6,9 +6,8 @@ import { Board } from '../Board'
 export function Page() {
 
    const {id} = useParams();
-   
 
-  return (
+   return (
     <div>
         <Header id = {id} />
         <Board id = {id}/>

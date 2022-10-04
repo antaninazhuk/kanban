@@ -24,37 +24,6 @@ export const fetchBoards = createAsyncThunk(
 )
 
 
-  export const addNewBoard = createAsyncThunk(
-    'boards/addNewBoard',
-    async function (text, { rejectWithValue, dispatch }) {
-        
-      try {
-        const board = { 
-            "data":{
-          'name': text
-        }
-    }
-  
-        const response = await fetch('http://localhost:1337/api/boards', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(board)
-        });
-  
-        if (!response.ok) {
-          throw new Error("Can't add task. Server error");
-        }
-  
-        const data = await response.json();
-           
-        dispatch(addBoard(data))
-      } catch (error) {
-        return rejectWithValue(error.message)
-      }
-    }
-  )
 
 
 const boardSlice = createSlice({
@@ -64,12 +33,7 @@ const boardSlice = createSlice({
         status: null,
         error: null
     },
-    reducers: {     
-        addBoard(state, action) {
-            state.boards.push(action.payload)
-        }
-      },
-         
+            
    
     extraReducers: {
         [fetchBoards.pending]: (state) => {
