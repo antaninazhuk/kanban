@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBoards, addNewBoard } from '../../store/features/boardSlice';
+import { fetchBoards} from '../../store/features/boardSlice';
+import { createBoard } from '../../services/boards';
 import { Row, Col } from 'react-bootstrap';
-import { Spinner } from '../../common/Spinner';
+import { Spinner} from '../../common/Spinner';
+import { CreateBoardModal} from '../../common/CreateBoardModal';
 import { Navbar } from './components/Navbar';
 import './Sidebar.scss';
 
@@ -13,16 +15,24 @@ export function Sidebar() {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [isSend, setIsSend] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  function handleCreateBoard(boardName) {
+    createBoard(boardName);
+    setIsSend(true);
+  }
 
   useEffect(() => {
     setIsLoading(true);
     dispatch(fetchBoards());
     setIsLoading(false);
-  }, [dispatch])
+  }, [isSend])
 
-  function handleCreateBoard() {
-     addNewBoard('NewBoard')
-  }
+ 
 
   return (
     <div className='sidebar'>
@@ -35,7 +45,8 @@ export function Sidebar() {
       </Row>
       {isLoading ? <Spinner /> : <Navbar list={boards} />}
 
-      <button className='create_board' onClick={handleCreateBoard}>+ Create new board</button>
+      <button className='create_board' onClick={handleShow}>+ Create new board</button>
+      <CreateBoardModal show={show} onShow={handleClose} onCreate={handleCreateBoard} />
 
 
     </div>

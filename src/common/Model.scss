@@ -1,0 +1,16 @@
+.modal-content {
+    background: var(--dark_blue);
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    border: none;
+}
+
+.add-input,
+.add-input:focus {
+    background: var(--light);
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
